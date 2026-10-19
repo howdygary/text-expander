@@ -13,7 +13,7 @@
   <meta property="og:url" content="https://howdyimgary.github.io/text-expander/">
   <meta property="og:image" content="https://howdyimgary.github.io/text-expander/images/text-expander-in-action@2x.png">
   <link rel="icon" href="images/favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -95,9 +95,11 @@
     </section>
 
     <section class="section container" id="variables" aria-labelledby="variables-title">
-      <h2 id="variables-title">Variables</h2>
-      <div class="vars-intro">
-        <p>Add these anywhere in a snippet. In Settings, <b>Insert variable</b> adds them for you, and the preview shows what the snippet will type. Each one below shows a snippet in action.</p>
+      <div class="vars-head">
+        <div>
+          <h2 id="variables-title">Variables</h2>
+          <p>A snippet is a trigger, such as <code>!ddate</code>, and the text it turns into, called its replacement. Add a variable to the replacement, and Text Expander fills it in each time the snippet runs. In Settings, <b>Insert variable</b> adds them for you.</p>
+        </div>
         <button type="button" class="button small demo-toggle" data-playing="false" hidden>
           <svg class="icon-pause" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M4 2.5h2.6v11H4zm5.4 0H12v11H9.4z"/></svg>
           <svg class="icon-play" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M4.5 2.4v11.2L13.4 8z"/></svg>
@@ -106,76 +108,165 @@
       </div>
       <ul class="vars">
         <li class="var">
-          <h4><code>{{date}}</code></h4>
-          <p>Today’s date</p>
-          <div class="demo" data-demo="date">
-            <code class="demo-snippet">!ddate={{date}}</code>
-            <div class="demo-field" role="img" aria-label="Typing !ddate after “Due” gives “Due 10/18/26”"><span class="demo-live">Due 10/18/26</span></div>
+          <div class="var-text">
+            <h3 class="var-name">Date <code class="var-token">{{date}}</code></h3>
+            <p>Today’s date.</p>
           </div>
-        </li>
-        <li class="var">
-          <h4><code>{{time}}</code></h4>
-          <p>The time</p>
-          <div class="demo" data-demo="time">
-            <code class="demo-snippet">!ttime={{time}}</code>
-            <div class="demo-field" role="img" aria-label="Typing !ttime after “Called at” gives “Called at 09:41 AM”"><span class="demo-live">Called at 09:41 AM</span></div>
-          </div>
-        </li>
-        <li class="var">
-          <h4><code>{{datetime}}</code></h4>
-          <p>The date and time</p>
-          <div class="demo" data-demo="datetime">
-            <code class="demo-snippet">!ddt={{datetime}}</code>
-            <div class="demo-field" role="img" aria-label="Typing !ddt after “Updated” gives “Updated 10/18/26 09:41 AM”"><span class="demo-live">Updated 10/18/26 09:41 AM</span></div>
-          </div>
-        </li>
-        <li class="var">
-          <h4><code>{{isodate}}</code></h4>
-          <p>The date as year, month and day</p>
-          <div class="demo" data-demo="isodate">
-            <code class="demo-snippet">!isodate={{isodate}}</code>
-            <div class="demo-field" role="img" aria-label="Typing !isodate after “report-” gives “report-2026-10-18”"><span class="demo-live">report-2026-10-18</span></div>
-          </div>
-        </li>
-        <li class="var">
-          <h4><code>{{date:dddd}}</code></h4>
-          <p>The date in a format you choose. <code>dddd</code> is the day of the week, and <code>MMMM d, yyyy</code> is the full date.</p>
-          <div class="demo" data-demo="longdate">
-            <code class="demo-snippet">!longdate={{date:dddd, MMMM d, yyyy}}</code>
-            <div class="demo-field" role="img" aria-label="Typing !longdate gives “Sunday, October 18, 2026”"><span class="demo-live">Sunday, October 18, 2026</span></div>
-          </div>
-        </li>
-        <li class="var">
-          <h4><code>{{clipboard}}</code></h4>
-          <p>What’s on your clipboard</p>
-          <div class="demo" data-demo="clipboard">
-            <code class="demo-snippet">!link=Here’s the link: {{clipboard}}</code>
-            <div class="demo-clip" aria-hidden="true">
-              <span class="demo-url"><span class="demo-url-text">contoso.com/q4-plan</span></span>
-              <span class="demo-keys"><kbd>Ctrl</kbd>+<kbd>C</kbd></span>
+          <div class="var-demo" data-demo>
+            <div class="var-panel">
+              <p class="lbl">Snippet</p>
+              <dl class="kv">
+                <dt>Trigger</dt><dd><code class="trig">!ddate</code></dd>
+                <dt>Replacement</dt><dd><code class="repl"><span class="tok">{{date}}</span></code></dd>
+              </dl>
             </div>
-            <div class="demo-field" role="img" aria-label="With contoso.com/q4-plan copied, typing !link gives “Here’s the link: contoso.com/q4-plan”"><span class="demo-live">Here’s the link: contoso.com/q4-plan</span></div>
-          </div>
-        </li>
-        <li class="var">
-          <h4><code>{{prompt:Name}}</code></h4>
-          <p>Something you type each time the snippet runs. Text Expander asks for it using your label, here “Name”.</p>
-          <div class="demo" data-demo="prompt">
-            <code class="demo-snippet">!hello=Hi {{prompt:Name}}, thanks for reaching out!</code>
-            <div class="demo-field" role="img" aria-label="Typing !hello opens a small window that asks for Name. Entering Elaine gives “Hi Elaine, thanks for reaching out!”"><span class="demo-live">Hi Elaine, thanks for reaching out!</span></div>
-            <div class="demo-ask" aria-hidden="true">
-              <span class="demo-ask-title">Text Expander<svg viewBox="0 0 10 10" width="8" height="8"><path d="M1 1l8 8M9 1 1 9" stroke="currentColor" stroke-width="1.2"/></svg></span>
-              <span class="demo-ask-label">Name</span>
-              <span class="demo-ask-row"><span class="demo-ask-box"><span class="demo-answer"></span><span class="caret"></span></span><span class="demo-ask-ok">OK</span></span>
+            <div class="var-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></div>
+            <div class="var-panel">
+              <p class="lbl">Type <code class="trig">!ddate</code> in any app</p>
+              <div class="demo-field" role="img" aria-label="Typing !ddate gives “10/18/26”."><span class="demo-live">10/18/26</span></div>
             </div>
           </div>
         </li>
         <li class="var">
-          <h4><code>$|$</code></h4>
-          <p>Where the cursor goes once the snippet expands</p>
-          <div class="demo" data-demo="cursor">
-            <code class="demo-snippet">!todo=// TODO: $|$ ({{isodate}})</code>
-            <div class="demo-field" role="img" aria-label="Typing !todo gives “// TODO:  (2026-10-18)”, with the cursor after “// TODO:” so you can keep typing"><span class="demo-live">// TODO: <span class="caret"></span> (2026-10-18)</span></div>
+          <div class="var-text">
+            <h3 class="var-name">Time <code class="var-token">{{time}}</code></h3>
+            <p>The current time.</p>
+          </div>
+          <div class="var-demo" data-demo>
+            <div class="var-panel">
+              <p class="lbl">Snippet</p>
+              <dl class="kv">
+                <dt>Trigger</dt><dd><code class="trig">!ttime</code></dd>
+                <dt>Replacement</dt><dd><code class="repl"><span class="tok">{{time}}</span></code></dd>
+              </dl>
+            </div>
+            <div class="var-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></div>
+            <div class="var-panel">
+              <p class="lbl">Type <code class="trig">!ttime</code> in any app</p>
+              <div class="demo-field" role="img" aria-label="Typing !ttime gives “09:41 AM”."><span class="demo-live">09:41 AM</span></div>
+            </div>
+          </div>
+        </li>
+        <li class="var">
+          <div class="var-text">
+            <h3 class="var-name">Date and time <code class="var-token">{{datetime}}</code></h3>
+            <p>The date and the time together.</p>
+          </div>
+          <div class="var-demo" data-demo>
+            <div class="var-panel">
+              <p class="lbl">Snippet</p>
+              <dl class="kv">
+                <dt>Trigger</dt><dd><code class="trig">!ddt</code></dd>
+                <dt>Replacement</dt><dd><code class="repl"><span class="tok">{{datetime}}</span></code></dd>
+              </dl>
+            </div>
+            <div class="var-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></div>
+            <div class="var-panel">
+              <p class="lbl">Type <code class="trig">!ddt</code> in any app</p>
+              <div class="demo-field" role="img" aria-label="Typing !ddt gives “10/18/26 09:41 AM”."><span class="demo-live">10/18/26 09:41 AM</span></div>
+            </div>
+          </div>
+        </li>
+        <li class="var">
+          <div class="var-text">
+            <h3 class="var-name">ISO date <code class="var-token">{{isodate}}</code></h3>
+            <p>The date as year, month and day. Handy in file names, because it sorts in order.</p>
+          </div>
+          <div class="var-demo" data-demo>
+            <div class="var-panel">
+              <p class="lbl">Snippet</p>
+              <dl class="kv">
+                <dt>Trigger</dt><dd><code class="trig">!isodate</code></dd>
+                <dt>Replacement</dt><dd><code class="repl"><span class="tok">{{isodate}}</span></code></dd>
+              </dl>
+            </div>
+            <div class="var-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></div>
+            <div class="var-panel">
+              <p class="lbl">Type <code class="trig">!isodate</code> in any app</p>
+              <div class="demo-field" role="img" aria-label="Typing !isodate gives “2026-10-18”."><span class="demo-live">2026-10-18</span></div>
+            </div>
+          </div>
+        </li>
+        <li class="var">
+          <div class="var-text">
+            <h3 class="var-name">Custom date format <code class="var-token">{{date:<i>format</i>}}</code></h3>
+            <p>The date your way: <code>dddd</code> is the day of the week, <code>MMMM</code> the month, <code>d</code> the day and <code>yyyy</code> the year.</p>
+          </div>
+          <div class="var-demo" data-demo>
+            <div class="var-panel">
+              <p class="lbl">Snippet</p>
+              <dl class="kv">
+                <dt>Trigger</dt><dd><code class="trig">!longdate</code></dd>
+                <dt>Replacement</dt><dd><code class="repl"><span class="tok">{{date:dddd, MMMM d, yyyy}}</span></code></dd>
+              </dl>
+            </div>
+            <div class="var-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></div>
+            <div class="var-panel">
+              <p class="lbl">Type <code class="trig">!longdate</code> in any app</p>
+              <div class="demo-field" role="img" aria-label="Typing !longdate gives “Sunday, October 18, 2026”."><span class="demo-live">Sunday, October 18, 2026</span></div>
+            </div>
+          </div>
+        </li>
+        <li class="var">
+          <div class="var-text">
+            <h3 class="var-name">Clipboard contents <code class="var-token">{{clipboard}}</code></h3>
+            <p>Whatever you copied last.</p>
+          </div>
+          <div class="var-demo" data-demo data-copied="contoso.com/q4-plan">
+            <div class="var-panel">
+              <p class="lbl">Snippet</p>
+              <dl class="kv">
+                <dt>Trigger</dt><dd><code class="trig">!link</code></dd>
+                <dt>Replacement</dt><dd><code class="repl">Here’s the link: <span class="tok">{{clipboard}}</span></code></dd>
+              </dl>
+            </div>
+            <div class="var-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></div>
+            <div class="var-panel">
+              <p class="lbl">Copy a link, then type <code class="trig">!link</code> in any app</p>
+              <div class="demo-clip" aria-hidden="true"><span class="demo-url"><span class="demo-url-text">contoso.com/q4-plan</span></span><span class="demo-keys"><kbd>Ctrl</kbd>+<kbd>C</kbd></span></div>
+              <div class="demo-field" role="img" aria-label="With contoso.com/q4-plan copied, typing !link gives “Here’s the link: contoso.com/q4-plan”."><span class="demo-live">Here’s the link: contoso.com/q4-plan</span></div>
+            </div>
+          </div>
+        </li>
+        <li class="var">
+          <div class="var-text">
+            <h3 class="var-name">Ask me when it runs <code class="var-token">{{prompt:<i>question</i>}}</code></h3>
+            <p>A small window asks you to type something, with your words as the question.</p>
+          </div>
+          <div class="var-demo" data-demo data-answer="Elaine">
+            <div class="var-panel">
+              <p class="lbl">Snippet</p>
+              <dl class="kv">
+                <dt>Trigger</dt><dd><code class="trig">!hello</code></dd>
+                <dt>Replacement</dt><dd><code class="repl">Hi <span class="tok">{{prompt:First name}}</span>, thanks for reaching out!</code></dd>
+              </dl>
+            </div>
+            <div class="var-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></div>
+            <div class="var-panel">
+              <p class="lbl">Type <code class="trig">!hello</code> in any app</p>
+              <div class="demo-field" role="img" aria-label="Typing !hello opens a small window that asks for “First name”. Answering Elaine gives “Hi Elaine, thanks for reaching out!”."><span class="demo-live">Hi Elaine, thanks for reaching out!</span></div>
+              <div class="demo-ask" aria-hidden="true"><span class="demo-ask-title">Text Expander<svg viewBox="0 0 10 10" width="8" height="8"><path d="M1 1l8 8M9 1 1 9" stroke="currentColor" stroke-width="1.2"/></svg></span><span class="demo-ask-label">First name</span><span class="demo-ask-row"><span class="demo-ask-box"><span class="demo-answer"></span><span class="caret"></span></span><span class="demo-ask-ok">OK</span></span></div>
+            </div>
+          </div>
+        </li>
+        <li class="var">
+          <div class="var-text">
+            <h3 class="var-name">Cursor position <code class="var-token">$|$</code></h3>
+            <p>Where the cursor ends up, so you can keep typing.</p>
+          </div>
+          <div class="var-demo" data-demo data-then="team">
+            <div class="var-panel">
+              <p class="lbl">Snippet</p>
+              <dl class="kv">
+                <dt>Trigger</dt><dd><code class="trig">!dear</code></dd>
+                <dt>Replacement</dt><dd><code class="repl">Dear <span class="tok">$|$</span>,</code></dd>
+              </dl>
+            </div>
+            <div class="var-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></div>
+            <div class="var-panel">
+              <p class="lbl">Type <code class="trig">!dear</code> in any app</p>
+              <div class="demo-field" role="img" aria-label="Typing !dear puts the cursor after “Dear”, so typing “team” gives “Dear team,”."><span class="demo-live">Dear <span class="caret"></span>,</span></div>
+            </div>
           </div>
         </li>
       </ul>
@@ -231,6 +322,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=2"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>

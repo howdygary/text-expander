@@ -104,19 +104,39 @@ code, kbd { font-family: var(--mono); font-size: 0.88em; }
 code { background: var(--code-bg); border: 1px solid var(--stroke); border-radius: 4px; padding: 0.05em 0.35em; overflow-wrap: anywhere; }
 kbd { background: var(--surface); border: 1px solid var(--stroke); border-bottom-width: 2px; border-radius: 4px; padding: 0.05em 0.4em; }
 
-/* Variables: each card shows a snippet in action. script.js plays the demos; without it they show the result. */
-.vars-intro { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 24px; margin-bottom: 20px; }
-.vars-intro p { flex: 1 1 460px; max-width: 820px; margin: 0; }
+/* Variables: one list. Each row has a snippet that uses the variable, and a text box where it runs.
+   script.js plays the rows; without it, each box shows the result. */
+.vars-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; margin-bottom: 20px; }
+.vars-head > div { flex: 1 1 460px; min-width: 0; }
+.vars-head h2 { margin-bottom: 10px; }
+.vars-head p { max-width: 760px; margin: 0; }
 .button.small { min-height: 32px; padding: 0 12px; gap: 8px; font-size: 14px; }
 .demo-toggle { margin-left: auto; }
 .demo-toggle[data-playing="true"] .icon-play, .demo-toggle[data-playing="false"] .icon-pause { display: none; }
-.vars { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 16px; }
-.var { display: flex; flex-direction: column; padding: 18px 20px 20px; background: var(--surface); border: 1px solid var(--stroke); border-radius: 10px; }
-.var h4 { margin: 0 0 6px; font: 600 16px/1.4 var(--font); }
-.var > p { margin: 0 0 16px; color: var(--text-2); }
+.vars { container: vars / inline-size; margin: 0; padding: 0; list-style: none; background: var(--surface); border: 1px solid var(--stroke); border-radius: 10px; }
+.var { display: grid; gap: 14px; padding: 20px 22px; }
+.var + .var { border-top: 1px solid var(--stroke); }
+.var-name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; margin: 0 0 4px; font: 600 17px/1.35 var(--display); }
+.var-token { font-size: 13px; }
+.var-text p { margin: 0; color: var(--text-2); }
+.var-demo { display: grid; gap: 8px; }
+.var-panel { position: relative; padding: 10px 12px 12px; background: var(--bg); border: 1px solid var(--stroke); border-radius: 8px; }
+.var-arrow { display: grid; place-items: center; color: var(--text-2); }
+.var-arrow svg { transform: rotate(90deg); }
+.var-arrow path { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+@container vars (min-width: 760px) {
+  .var { grid-template-columns: minmax(170px, 0.8fr) minmax(0, 2.2fr); align-items: start; gap: 28px; }
+  .var-demo { grid-template-columns: minmax(0, 1fr) 20px minmax(0, 1.2fr); }
+  .var-arrow svg { transform: none; }
+}
+.lbl { margin: 0 0 6px; color: var(--text-2); font: 600 12px/1.4 var(--font); }
+.kv { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 6px 12px; margin: 0; }
+.kv dt { color: var(--text-2); font-size: 13px; line-height: 1.8; }
+.kv dd { min-width: 0; margin: 0; line-height: 1.8; }
+code.trig { white-space: nowrap; }
+code.repl { white-space: pre-wrap; overflow-wrap: anywhere; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.tok { padding: 0 2px; border-radius: 3px; background: color-mix(in srgb, var(--accent) 20%, transparent); }
 
-.demo { position: relative; margin-top: auto; padding: 10px 12px 12px; background: var(--bg); border: 1px solid var(--stroke); border-radius: 8px; }
-.demo-snippet { display: block; margin-bottom: 8px; padding: 0; background: none; border: 0; font-size: 13px; color: var(--text-2); }
 .demo-field { display: grid; padding: 5px 10px 4px; background: var(--surface); border: 1px solid var(--stroke); border-bottom: 2px solid var(--accent); border-radius: 4px; font-size: 15px; line-height: 1.6; }
 .demo-field > span { grid-area: 1 / 1; min-width: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 .demo-sizer { visibility: hidden; }
