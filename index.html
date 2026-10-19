@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PowerToys Text Expander by Gary Hsu</title>
+  <meta name="description" content="PowerToys Text Expander turns short triggers you type into longer text, in any app on Windows.">
+  <meta name="author" content="Gary Hsu">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PowerToys Text Expander by Gary Hsu">
+  <meta property="og:description" content="Type a short trigger and get the full text, in any app on Windows.">
+  <meta property="og:url" content="https://howdyimgary.github.io/text-expander/">
+  <meta property="og:image" content="https://howdyimgary.github.io/text-expander/images/text-expander-in-action@2x.png">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container bar">
+      <a class="brand" href="./">
+        <img src="images/favicon.svg" alt="" width="24" height="24">
+        <span>Text Expander</span>
+      </a>
+      <a class="button subtle" href="https://github.com/microsoft/PowerToys">PowerToys on GitHub</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero container" aria-labelledby="title">
+      <p class="eyebrow">Part of the PowerToys suite of tools for Windows</p>
+      <h1 id="title">PowerToys Text Expander</h1>
+      <p class="lead">Type a short trigger and get the full text, in any app.</p>
+      <div class="actions">
+        <a class="button accent" href="https://github.com/microsoft/PowerToys/releases">Download PowerToys</a>
+        <a class="button" href="#write">Write your first snippet</a>
+      </div>
+      <figure class="shot">
+        <img src="images/text-expander-in-action.png"
+             srcset="images/text-expander-in-action.png 1x, images/text-expander-in-action@2x.png 2x"
+             width="1233" height="436"
+             alt="Three apps side by side. In an email, !mysig has turned into a signature. In a chat with Elaine, !omw has turned into “On my way”. In a web form, !myaddr has turned into a street address.">
+      </figure>
+    </section>
+
+    <section class="section container" aria-labelledby="how-title">
+      <h2 id="how-title">How it works</h2>
+      <ol class="steps">
+        <li>
+          <h3>Turn it on</h3>
+          <p>Open PowerToys Settings, select <b>Text Expander</b> and turn on <b>Enable Text Expander</b>.</p>
+        </li>
+        <li>
+          <h3>Add a snippet</h3>
+          <p>Select <b>New snippet</b>, then give it a trigger, such as <code>!mysig</code>, and the text it should turn into. You can also start from an example.</p>
+        </li>
+        <li>
+          <h3>Type the trigger</h3>
+          <p>In email, chat, your browser or any other app, Text Expander swaps the trigger for your text as you type.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section container" aria-labelledby="features-title">
+      <h2 id="features-title">Make it yours</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Short or long</h3>
+          <p>A word, an address or a whole email. Text Expander types short snippets, pastes longer ones and then puts your clipboard back.</p>
+        </article>
+        <article class="card">
+          <h3>Fill in the details</h3>
+          <p>Add the date or time in the format you like, what’s on your clipboard, or something Text Expander asks you each time the snippet runs.</p>
+        </article>
+        <article class="card">
+          <h3>Put the cursor where you need it</h3>
+          <p>Mark a spot with <code>$|$</code> and the cursor lands there after the snippet expands, ready for you to keep typing.</p>
+        </article>
+        <article class="card">
+          <h3>Undo in one step</h3>
+          <p>Didn’t mean to expand it? Press <kbd>Ctrl</kbd>+<kbd>Z</kbd> straight away to get back what you typed.</p>
+        </article>
+        <article class="card">
+          <h3>Sync across PCs</h3>
+          <p>Keep the same snippets on every PC with OneDrive, or keep them in a folder from another sync app.</p>
+        </article>
+        <article class="card">
+          <h3>Just a text file</h3>
+          <p>Your snippets live in one plain text file that you can edit in Settings or in any text editor. Changes apply as soon as you save.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container" id="write" aria-labelledby="write-title">
+      <h2 id="write-title">Write your first snippet</h2>
+      <p>The easiest way is <b>New snippet</b> in Settings. You can also edit the snippet file in any text editor. Write one snippet per line, as <code>trigger=replacement</code>. For text with several lines, put <code>trigger&lt;&lt;&lt;</code> on the line before it and <code>&gt;&gt;&gt;</code> on the line after it.</p>
+      <pre class="code"><code>!myemail=you@example.com
+!mysig=Best regards,\nYour Name
+!today={{date:dddd, MMMM d}}
+!reply&lt;&lt;&lt;
+Hi {{prompt:Name}},
+
+Thanks for getting in touch. $|$
+
+Best regards,
+Your Name
+&gt;&gt;&gt;</code></pre>
+      <p class="note">Start triggers with a symbol such as <code>!</code> so they don’t fire in the middle of a word. In a one-line snippet, <code>\n</code> starts a new line and <code>\t</code> adds a tab.</p>
+
+      <h3 class="subhead">Variables</h3>
+      <p>Add these anywhere in a snippet. In Settings, <b>Insert variable</b> adds them for you, and the preview shows what the snippet will type.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Variable</th><th scope="col">What it adds</th><th scope="col">Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>{{date}}</code></td><td>Today’s date</td><td data-sample="date">10/18/26</td></tr>
+            <tr><td><code>{{time}}</code></td><td>The time</td><td data-sample="time">09:41 AM</td></tr>
+            <tr><td><code>{{datetime}}</code></td><td>The date and time</td><td data-sample="datetime">10/18/26 09:41 AM</td></tr>
+            <tr><td><code>{{isodate}}</code></td><td>The date as year, month and day</td><td data-sample="isodate">2026-10-18</td></tr>
+            <tr><td><code>{{date:dddd}}</code></td><td>The date in a format you choose. <code>dddd</code> is the day of the week, and <code>MMMM d, yyyy</code> is the full date.</td><td data-sample="weekday">Sunday</td></tr>
+            <tr><td><code>{{clipboard}}</code></td><td>What’s on your clipboard</td><td>Whatever you copied last</td></tr>
+            <tr><td><code>{{prompt:Name}}</code></td><td>Something you type each time the snippet runs. Text Expander asks for it using your label, here “Name”.</td><td>A small window asks for “Name”</td></tr>
+            <tr><td><code>$|$</code></td><td>Where the cursor goes once the snippet expands</td><td>The cursor waits there</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section container" id="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">Frequently asked questions</h2>
+      <div class="faq">
+        <article>
+          <h3>Where are my snippets saved?</h3>
+          <p>In a plain text file called <code>PowerToysTextExpanderSnippets.txt</code>. Unless you sync it, it’s in <code>%LOCALAPPDATA%\<wbr>Microsoft\<wbr>PowerToys\<wbr>TextExpander</code>. Text Expander reloads it whenever you save, so there’s nothing to restart.</p>
+        </article>
+        <article>
+          <h3>Can I use the same snippets on all my PCs?</h3>
+          <p>Yes. In Text Expander settings, turn on <b>Sync across PCs</b> to keep your snippets in OneDrive. Using another sync app? Choose its folder instead.</p>
+        </article>
+        <article>
+          <h3>Does it work in every app?</h3>
+          <p>In most apps. Snippets don’t expand in apps running as administrator or in standard Windows password boxes. They can still expand in password fields on websites and in some apps.</p>
+        </article>
+        <article>
+          <h3>What if an app doesn’t accept the text?</h3>
+          <p>Some apps block pasting. In Text Expander settings, under <b>Advanced</b>, set <b>Insertion method</b> to <b>Always type</b>.</p>
+        </article>
+        <article>
+          <h3>Why does my trigger fire in the middle of a word?</h3>
+          <p>Start your triggers with a symbol such as <code>!</code>, or turn on <b>Wait for the whole word</b> under <b>Advanced</b>. Text Expander then waits for a space or punctuation before it expands, and leaves the space or punctuation in place.</p>
+        </article>
+        <article>
+          <h3>Can I undo an expansion?</h3>
+          <p>Yes. Right after a snippet expands, press <kbd>Ctrl</kbd>+<kbd>Z</kbd> to change it back to what you typed. This doesn’t work for snippets that use your clipboard or ask you to type something.</p>
+        </article>
+        <article>
+          <h3>Does Text Expander need administrator rights?</h3>
+          <p>No. It runs as you. To edit snippets, PowerToys needs to run without administrator rights.</p>
+        </article>
+        <article>
+          <h3>Can my organization turn it off?</h3>
+          <p>Yes. Administrators can turn off Text Expander with group policy, using the <code>ConfigureEnabledUtilityTextExpander</code> policy ID. Learn more in the <a href="https://learn.microsoft.com/windows/powertoys/grouppolicy">PowerToys group policy documentation</a>.</p>
+        </article>
+        <article>
+          <h3>Where can I ask a question or request a feature?</h3>
+          <p>Open an issue in the <a href="https://github.com/microsoft/PowerToys/issues">PowerToys repository on GitHub</a>.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Text Expander and this page were built by <a href="https://github.com/howdyimgary">Gary Hsu</a>.</p>
+      <p>Page last updated October 18, 2026.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Show the variable examples for the moment the page is read, in the formats Text Expander uses.
+    (() => {
+      const now = new Date();
+      const pad = n => String(n).padStart(2, "0");
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const date = `${pad(now.getMonth() + 1)}/${pad(now.getDate())}/${String(now.getFullYear()).slice(-2)}`;
+      const time = `${pad(now.getHours() % 12 || 12)}:${pad(now.getMinutes())} ${now.getHours() < 12 ? "AM" : "PM"}`;
+      const samples = {
+        date,
+        time,
+        datetime: `${date} ${time}`,
+        isodate: `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`,
+        weekday: days[now.getDay()],
+      };
+      document.querySelectorAll("[data-sample]").forEach(cell => {
+        const value = samples[cell.dataset.sample];
+        if (value) cell.textContent = value;
+      });
+    })();
+  </script>
+</body>
+</html>
