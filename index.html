@@ -9,7 +9,7 @@
   <meta name="color-scheme" content="light dark">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Text Expander by Gary Hsu">
-  <meta property="og:description" content="Type a short trigger and get the full text, in any app on Windows.">
+  <meta property="og:description" content="The text you type every day, a few keystrokes away, in any app on Windows.">
   <meta property="og:url" content="https://howdyimgary.github.io/text-expander/">
   <meta property="og:image" content="https://howdyimgary.github.io/text-expander/images/text-expander-in-action@2x.png">
   <link rel="icon" href="images/favicon.svg?v=2" type="image/svg+xml">
@@ -32,14 +32,15 @@
     <section class="hero container" aria-labelledby="title">
       <p class="eyebrow">Part of the PowerToys suite of tools for Windows</p>
       <h1 id="title">Text Expander</h1>
-      <p class="lead">Type a short trigger and get the full text, in any app.</p>
+      <p class="lead">The text you type every day, a few keystrokes away.</p>
       <div class="actions">
         <a class="button accent" href="https://github.com/microsoft/PowerToys/releases">Download PowerToys</a>
-        <a class="button" href="#write">Write your first snippet</a>
+        <a class="button" href="#variables">See what snippets can do</a>
       </div>
       <figure class="shot">
-        <img src="images/text-expander-in-action.png"
-             srcset="images/text-expander-in-action.png 1x, images/text-expander-in-action@2x.png 2x"
+        <img src="images/text-expander-in-action@2x.png?v=3"
+             srcset="images/text-expander-in-action@2x.png?v=3 2466w, images/text-expander-in-action@3x.png?v=3 3699w, images/text-expander-in-action@4x.png?v=3 4932w"
+             sizes="(min-width: 1160px) 1120px, (min-width: 1001px) calc(100vw - 40px), 1075px"
              width="1233" height="436"
              alt="Three apps side by side. In an email, !mysig has turned into a signature. In a chat with Elaine, !omw has turned into “On my way”. In a web form, !myaddr has turned into a street address.">
       </figure>
@@ -93,23 +94,8 @@
       </div>
     </section>
 
-    <section class="section container" id="write" aria-labelledby="write-title">
-      <h2 id="write-title">Write your first snippet</h2>
-      <p>The easiest way is <b>New snippet</b> in Settings. You can also edit the snippet file in any text editor. Write one snippet per line, as <code>trigger=replacement</code>. For text with several lines, put <code>trigger&lt;&lt;&lt;</code> on the line before it and <code>&gt;&gt;&gt;</code> on the line after it.</p>
-      <pre class="code"><code>!myemail=you@example.com
-!mysig=Best regards,\nYour Name
-!today={{date:dddd, MMMM d}}
-!reply&lt;&lt;&lt;
-Hi {{prompt:Name}},
-
-Thanks for getting in touch. $|$
-
-Best regards,
-Your Name
-&gt;&gt;&gt;</code></pre>
-      <p class="note">Start triggers with a symbol such as <code>!</code> so they don’t fire in the middle of a word. In a one-line snippet, <code>\n</code> starts a new line and <code>\t</code> adds a tab.</p>
-
-      <h3 class="subhead">Variables</h3>
+    <section class="section container" id="variables" aria-labelledby="variables-title">
+      <h2 id="variables-title">Variables</h2>
       <div class="vars-intro">
         <p>Add these anywhere in a snippet. In Settings, <b>Insert variable</b> adds them for you, and the preview shows what the snippet will type. Each one below shows a snippet in action.</p>
         <button type="button" class="button small demo-toggle" data-playing="false" hidden>
