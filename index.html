@@ -13,7 +13,7 @@
   <meta property="og:url" content="https://howdyimgary.github.io/text-expander/">
   <meta property="og:image" content="https://howdyimgary.github.io/text-expander/images/text-expander-in-action@2x.png">
   <link rel="icon" href="images/favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -98,80 +98,6 @@
       </ol>
     </section>
 
-    <section class="section container snippet-file" aria-labelledby="file-title">
-      <div class="file-intro">
-        <h2 id="file-title">Your snippets, in one text file</h2>
-        <p>When Text Expander starts for the first time, PowerToys creates <code>PowerToysTextExpanderSnippets.txt</code> with a short guide, examples and six snippets that work right away. Edit it in Settings or any text editor; changes apply when you save.</p>
-      </div>
-      <div class="file-window">
-        <div class="file-bar">
-          <span class="file-icon" aria-hidden="true">TXT</span>
-          <span class="file-name">PowerToysTextExpanderSnippets.txt</span>
-          <span class="file-path">%LOCALAPPDATA%\Microsoft\PowerToys\TextExpander</span>
-        </div>
-        <pre class="snippet-source" tabindex="0" aria-label="The complete default PowerToys Text Expander snippet file"><code>// ── PowerToys Text Expander ─────────────────────────────
-// Built by Gary Hsu · https://github.com/howdyimgary
-//
-// Type a trigger, such as !ddate, and Text Expander replaces it with its
-// snippet. The snippets at the bottom of this file work right away.
-//
-// ── How to write a snippet ──────────────────────────────
-// One line:       trigger=replacement
-// Several lines:  trigger&lt;&lt;&lt;
-//                 first line
-//                 second line
-//                 &gt;&gt;&gt;
-// Lines that start with //, like this one, are notes and are skipped.
-// Changes work as soon as you save this file.
-//
-// ── Variables, filled in each time a snippet expands ────
-// {{date}}           today's date, like 06/01/26
-// {{time}}           the time, like 02:30 PM
-// {{datetime}}       both, like 06/01/26 02:30 PM
-// {{isodate}}        the date year first, like 2026-06-01
-// {{date:FORMAT}}    a date your way: {{date:dddd, MMMM d}} gives Monday, June 1
-//                    (dddd weekday, MMMM month, d day, yyyy year, HH:mm 24-hour time)
-//                    Put words in single quotes, or they're read as codes:
-//                    {{date:'Today is' dddd}} gives Today is Monday
-// {{clipboard}}      the text you copied last, such as a link
-// {{prompt:Label}}   asks you to type something, with Label as the question,
-//                    like {{prompt:First name}}, and types what you enter
-// $|$                where the cursor ends up: Dear $|$, leaves it after "Dear "
-// \n and \t          a new line and a tab
-//
-// ── Tips ────────────────────────────────────────────────
-// - Start triggers with ! so they don't fire in the middle of a word.
-// - A trigger fires as soon as you type it, so one trigger can't be the start
-//   of another: !sig would fire before you could finish typing !signature.
-// - Same snippets on every PC: in PowerToys Settings &gt; Text Expander, turn on
-//   Sync across PCs.
-//
-// ── Examples: remove the // and the space after it to use one ──
-// !hello=Hi {{prompt:First name}}, thanks for reaching out!
-// !mdlink=[{{prompt:Link text}}]({{clipboard}})
-// !longdate={{date:dddd, MMMM d, yyyy}}
-// !time24={{date:HH:mm}}
-// !todo=// TODO: $|$ ({{isodate}})
-// !myaddr=123 Example Street\nSpringfield, ZZ 12345
-// !tabhead=Name\tEmail\tTeam
-// For !meeting, do that on all five of its lines:
-// !meeting&lt;&lt;&lt;
-// Meeting notes · {{date:dddd, MMMM d, yyyy}}
-// Attendees: $|$
-// Next steps:
-// &gt;&gt;&gt;
-//
-// ── Your snippets ───────────────────────────────────────
-
-!ddate={{date}}
-!ttime={{time}}
-!ddt={{datetime}}
-!isodate={{isodate}}
-!mysig=Best regards,\nYour Name
-!myemail=you@example.com</code></pre>
-      </div>
-    </section>
-
     <section class="section container" aria-labelledby="features-title">
       <h2 id="features-title">Make it yours</h2>
       <div class="cards">
@@ -196,8 +122,8 @@
           <p>Keep the same snippets on every PC with OneDrive, or keep them in a folder from another sync app.</p>
         </article>
         <article class="card">
-          <h3>Just a text file</h3>
-          <p>Your snippets live in one plain text file that you can edit in Settings or in any text editor. Changes apply as soon as you save.</p>
+          <h3>Plain text, full control</h3>
+          <p>Your snippets stay readable and portable in one text file, with no special format or editor required.</p>
         </article>
       </div>
     </section>
@@ -380,7 +306,7 @@
       </ul>
     </section>
 
-    <section class="section container" id="faq" aria-labelledby="faq-title">
+    <section class="section container faq-section" id="faq" aria-labelledby="faq-title">
       <h2 id="faq-title">Frequently asked questions</h2>
       <div class="faq">
         <article>
@@ -426,7 +352,7 @@
   <footer class="site-footer">
     <div class="container">
       <p>Text Expander and this page were built by <a href="https://github.com/howdyimgary">Gary Hsu</a>.</p>
-      <p>Page last updated October 18, 2026.</p>
+      <p>Page last updated October 19, 2026.</p>
     </div>
   </footer>
 
