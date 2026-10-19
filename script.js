@@ -4,7 +4,7 @@
 // rows that copy a link, answer a question or keep typing at the cursor.
 (() => {
   const list = document.querySelector(".vars");
-  const toggle = document.querySelector(".demo-toggle");
+  const toggle = document.querySelector(".vars-toggle");
   if (!list || !toggle) return;
 
   const now = new Date();
@@ -184,6 +184,134 @@
   const reduce = matchMedia("(prefers-reduced-motion: reduce)");
   reduce.addEventListener?.("change", () => { if (reduce.matches) setPlaying(false); });
   toggle.addEventListener("click", () => setPlaying(!list.classList.contains("playing")));
+  toggle.hidden = false;
+  setPlaying(!reduce.matches);
+})();
+
+// How it works, in action: the switch turns on, a snippet is added, and then its trigger is typed in an
+// email and turns into the snippet's text. The step that's playing lights up.
+(() => {
+  const steps = document.querySelector(".how");
+  const toggle = document.querySelector(".how-toggle");
+  if (!steps || !toggle) return;
+
+  const cards = [...steps.children];
+  const sw = steps.querySelector(".mini-switch");
+  const swText = steps.querySelector(".mini-switch-text");
+  const [triggerBox, replBox] = steps.querySelectorAll(".mini-box");
+  const trigger = steps.querySelector(".how-trigger");
+  const repl = steps.querySelector(".how-repl");
+  const save = steps.querySelector(".mini-btn.accent");
+  const mailBody = steps.querySelector(".mini-mail-body");
+  const live = steps.querySelector(".how-live");
+
+  // The snippet comes from the page: its trigger, and its text with each <br> as a new line.
+  const textOf = el => [...el.childNodes].map(n => (n.nodeName === "BR" ? "\n" : n.textContent)).join("");
+  const TRIGGER = trigger.textContent;
+  const TEXT = textOf(repl);
+
+  const span = (className, textContent = "") => Object.assign(document.createElement("span"), { className, textContent });
+  const light = n => cards.forEach((card, i) => card.classList.toggle("on", i === n - 1));
+  const setSwitch = on => {
+    sw.classList.toggle("on", on);
+    swText.textContent = on ? "On" : "Off";
+  };
+
+  // Each wait resolves to false once the animation is paused or restarted, which ends that round.
+  let run = 0;
+  let visible = !("IntersectionObserver" in window);
+  const wait = (ms, id) => new Promise(done => setTimeout(() => done(id === run), ms));
+  const vary = ms => ms * (0.7 + Math.random() * 0.6);
+  async function type(add, text, id, ms) {
+    for (const ch of text) {
+      if (!(await wait(vary(ms), id))) return false;
+      add(ch);
+    }
+    return true;
+  }
+
+  // How each step ends, shown while paused.
+  function settle() {
+    light(0);
+    setSwitch(true);
+    trigger.textContent = TRIGGER;
+    repl.textContent = TEXT;
+    [triggerBox, replBox, mailBody].forEach(box => box.classList.remove("focus", "typing"));
+    save.classList.remove("pressed");
+    live.replaceChildren(TEXT);
+  }
+
+  async function play(id) {
+    // 1. Start with the switch off, then turn it on.
+    light(1);
+    setSwitch(false);
+    trigger.textContent = "";
+    repl.textContent = "";
+    live.replaceChildren();
+    if (!(await wait(900, id))) return false;
+    setSwitch(true);
+    if (!(await wait(1100, id))) return false;
+
+    // 2. Type the trigger and the replacement, then save.
+    light(2);
+    triggerBox.classList.add("focus", "typing");
+    if (!(await type(ch => (trigger.textContent += ch), TRIGGER, id, 110))) return false;
+    triggerBox.classList.remove("focus", "typing");
+    replBox.classList.add("focus", "typing");
+    if (!(await wait(250, id))) return false;
+    if (!(await type(ch => (repl.textContent += ch), TEXT, id, 70))) return false;
+    replBox.classList.remove("typing");
+    if (!(await wait(450, id))) return false;
+    save.classList.add("pressed");
+    if (!(await wait(180, id))) return false;
+    save.classList.remove("pressed");
+    replBox.classList.remove("focus");
+    if (!(await wait(700, id))) return false;
+
+    // 3. In an email, the trigger turns into the snippet's text.
+    light(3);
+    mailBody.classList.add("typing");
+    const typed = span("demo-typed");
+    live.replaceChildren(typed);
+    if (!(await wait(400, id))) return false;
+    if (!(await type(ch => (typed.textContent += ch), TRIGGER, id, 110))) return false;
+    if (!(await wait(160, id))) return false;
+    typed.classList.add("hit");
+    if (!(await wait(240, id))) return false;
+    const result = span("demo-new", TEXT);
+    live.replaceChildren(result);
+    mailBody.classList.remove("typing");
+    void live.offsetWidth;
+    result.classList.add("settled");
+    return wait(3200, id);
+  }
+
+  async function loop(id) {
+    while (id === run) {
+      while (!visible) if (!(await wait(250, id))) return;
+      if (!(await play(id))) return;
+    }
+  }
+
+  // It plays only while it's on screen.
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { threshold: 0.3 }).observe(steps);
+  }
+
+  const label = toggle.querySelector(".demo-toggle-label");
+  function setPlaying(on) {
+    run += 1;
+    steps.classList.toggle("playing", on);
+    toggle.dataset.playing = String(on);
+    label.textContent = on ? "Pause animation" : "Play animation";
+    settle();
+    if (on) loop(run);
+  }
+
+  // With reduced motion turned on in Windows, it waits for Play.
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  reduce.addEventListener?.("change", () => { if (reduce.matches) setPlaying(false); });
+  toggle.addEventListener("click", () => setPlaying(!steps.classList.contains("playing")));
   toggle.hidden = false;
   setPlaying(!reduce.matches);
 })();

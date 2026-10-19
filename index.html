@@ -13,7 +13,7 @@
   <meta property="og:url" content="https://howdyimgary.github.io/text-expander/">
   <meta property="og:image" content="https://howdyimgary.github.io/text-expander/images/text-expander-in-action@2x.png">
   <link rel="icon" href="images/favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -47,21 +47,129 @@
     </section>
 
     <section class="section container" aria-labelledby="how-title">
-      <h2 id="how-title">How it works</h2>
-      <ol class="steps">
+      <div class="how-head">
+        <h2 id="how-title">How it works</h2>
+        <button type="button" class="button small demo-toggle how-toggle" data-playing="false" hidden>
+          <svg class="icon-pause" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M4 2.5h2.6v11H4zm5.4 0H12v11H9.4z"/></svg>
+          <svg class="icon-play" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M4.5 2.4v11.2L13.4 8z"/></svg>
+          <span class="demo-toggle-label">Play animation</span>
+        </button>
+      </div>
+      <ol class="steps how">
         <li>
           <h3>Turn it on</h3>
           <p>Open PowerToys Settings, select <b>Text Expander</b> and turn on <b>Enable Text Expander</b>.</p>
+          <div class="step-demo" role="img" aria-label="In PowerToys Settings, the Enable Text Expander switch is on.">
+            <p class="lbl">PowerToys Settings</p>
+            <div class="mini-setting">
+              <img src="images/favicon.svg?v=2" alt="" width="20" height="20">
+              <span class="mini-setting-name">Enable Text Expander</span>
+              <span class="mini-switch-text">On</span>
+              <span class="mini-switch on"></span>
+            </div>
+          </div>
         </li>
         <li>
           <h3>Add a snippet</h3>
           <p>Select <b>New snippet</b>, then give it a trigger, such as <code>!mysig</code>, and the text it should turn into. You can also start from an example.</p>
+          <div class="step-demo" role="img" aria-label="The Snippet window in PowerToys Settings, with the trigger !mysig and the replacement “Kind regards, Gary”.">
+            <p class="lbl">PowerToys Settings</p>
+            <div class="mini-dialog">
+              <p class="mini-title">Snippet</p>
+              <span class="mini-label">Trigger</span>
+              <div class="mini-box mini-trigger"><span class="how-trigger">!mysig</span><span class="caret"></span></div>
+              <span class="mini-label">Replacement</span>
+              <div class="mini-box mini-area"><span class="how-repl">Kind regards,<br>Gary</span><span class="caret"></span></div>
+              <div class="mini-actions"><span class="mini-btn accent">Save</span><span class="mini-btn">Cancel</span></div>
+            </div>
+          </div>
         </li>
         <li>
           <h3>Type the trigger</h3>
           <p>In email, chat, your browser or any other app, Text Expander swaps the trigger for your text as you type.</p>
+          <div class="step-demo" role="img" aria-label="In an email to Elaine, typing !mysig turns into “Kind regards, Gary”.">
+            <p class="lbl">Any app, such as email</p>
+            <div class="mini-mail">
+              <div class="mini-mail-to"><span>To</span><span class="mini-chip">Elaine</span></div>
+              <div class="mini-mail-body">Looks great – ship it!<br><br><span class="how-live">Kind regards,<br>Gary</span><span class="caret"></span></div>
+            </div>
+          </div>
         </li>
       </ol>
+    </section>
+
+    <section class="section container snippet-file" aria-labelledby="file-title">
+      <div class="file-intro">
+        <h2 id="file-title">Your snippets, in one text file</h2>
+        <p>When Text Expander starts for the first time, PowerToys creates <code>PowerToysTextExpanderSnippets.txt</code> with a short guide, examples and six snippets that work right away. Edit it in Settings or any text editor; changes apply when you save.</p>
+      </div>
+      <div class="file-window">
+        <div class="file-bar">
+          <span class="file-icon" aria-hidden="true">TXT</span>
+          <span class="file-name">PowerToysTextExpanderSnippets.txt</span>
+          <span class="file-path">%LOCALAPPDATA%\Microsoft\PowerToys\TextExpander</span>
+        </div>
+        <pre class="snippet-source" tabindex="0" aria-label="The complete default PowerToys Text Expander snippet file"><code>// ── PowerToys Text Expander ─────────────────────────────
+// Built by Gary Hsu · https://github.com/howdyimgary
+//
+// Type a trigger, such as !ddate, and Text Expander replaces it with its
+// snippet. The snippets at the bottom of this file work right away.
+//
+// ── How to write a snippet ──────────────────────────────
+// One line:       trigger=replacement
+// Several lines:  trigger&lt;&lt;&lt;
+//                 first line
+//                 second line
+//                 &gt;&gt;&gt;
+// Lines that start with //, like this one, are notes and are skipped.
+// Changes work as soon as you save this file.
+//
+// ── Variables, filled in each time a snippet expands ────
+// {{date}}           today's date, like 06/01/26
+// {{time}}           the time, like 02:30 PM
+// {{datetime}}       both, like 06/01/26 02:30 PM
+// {{isodate}}        the date year first, like 2026-06-01
+// {{date:FORMAT}}    a date your way: {{date:dddd, MMMM d}} gives Monday, June 1
+//                    (dddd weekday, MMMM month, d day, yyyy year, HH:mm 24-hour time)
+//                    Put words in single quotes, or they're read as codes:
+//                    {{date:'Today is' dddd}} gives Today is Monday
+// {{clipboard}}      the text you copied last, such as a link
+// {{prompt:Label}}   asks you to type something, with Label as the question,
+//                    like {{prompt:First name}}, and types what you enter
+// $|$                where the cursor ends up: Dear $|$, leaves it after "Dear "
+// \n and \t          a new line and a tab
+//
+// ── Tips ────────────────────────────────────────────────
+// - Start triggers with ! so they don't fire in the middle of a word.
+// - A trigger fires as soon as you type it, so one trigger can't be the start
+//   of another: !sig would fire before you could finish typing !signature.
+// - Same snippets on every PC: in PowerToys Settings &gt; Text Expander, turn on
+//   Sync across PCs.
+//
+// ── Examples: remove the // and the space after it to use one ──
+// !hello=Hi {{prompt:First name}}, thanks for reaching out!
+// !mdlink=[{{prompt:Link text}}]({{clipboard}})
+// !longdate={{date:dddd, MMMM d, yyyy}}
+// !time24={{date:HH:mm}}
+// !todo=// TODO: $|$ ({{isodate}})
+// !myaddr=123 Example Street\nSpringfield, ZZ 12345
+// !tabhead=Name\tEmail\tTeam
+// For !meeting, do that on all five of its lines:
+// !meeting&lt;&lt;&lt;
+// Meeting notes · {{date:dddd, MMMM d, yyyy}}
+// Attendees: $|$
+// Next steps:
+// &gt;&gt;&gt;
+//
+// ── Your snippets ───────────────────────────────────────
+
+!ddate={{date}}
+!ttime={{time}}
+!ddt={{datetime}}
+!isodate={{isodate}}
+!mysig=Best regards,\nYour Name
+!myemail=you@example.com</code></pre>
+      </div>
     </section>
 
     <section class="section container" aria-labelledby="features-title">
@@ -100,7 +208,7 @@
           <h2 id="variables-title">Variables</h2>
           <p>A snippet is a trigger, such as <code>!ddate</code>, and the text it turns into, called its replacement. Add a variable to the replacement, and Text Expander fills it in each time the snippet runs. In Settings, <b>Insert variable</b> adds them for you.</p>
         </div>
-        <button type="button" class="button small demo-toggle" data-playing="false" hidden>
+        <button type="button" class="button small demo-toggle vars-toggle" data-playing="false" hidden>
           <svg class="icon-pause" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M4 2.5h2.6v11H4zm5.4 0H12v11H9.4z"/></svg>
           <svg class="icon-play" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M4.5 2.4v11.2L13.4 8z"/></svg>
           <span class="demo-toggle-label">Play animations</span>
@@ -322,6 +430,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>
