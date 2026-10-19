@@ -1,4 +1,4 @@
-# PowerToys Text Expander
+# Text Expander
 
 Source for the Text Expander page at <https://howdyimgary.github.io/text-expander/>.
 

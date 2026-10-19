@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PowerToys Text Expander by Gary Hsu</title>
-  <meta name="description" content="PowerToys Text Expander turns short triggers you type into longer text, in any app on Windows.">
+  <title>Text Expander by Gary Hsu</title>
+  <meta name="description" content="Text Expander turns short triggers you type into longer text, in any app on Windows.">
   <meta name="author" content="Gary Hsu">
   <meta name="color-scheme" content="light dark">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="PowerToys Text Expander by Gary Hsu">
+  <meta property="og:title" content="Text Expander by Gary Hsu">
   <meta property="og:description" content="Type a short trigger and get the full text, in any app on Windows.">
   <meta property="og:url" content="https://howdyimgary.github.io/text-expander/">
   <meta property="og:image" content="https://howdyimgary.github.io/text-expander/images/text-expander-in-action@2x.png">
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -21,7 +21,7 @@
   <header class="site-header">
     <div class="container bar">
       <a class="brand" href="./">
-        <img src="images/favicon.svg" alt="" width="24" height="24">
+        <img src="images/favicon.svg?v=2" alt="" width="24" height="24">
         <span>Text Expander</span>
       </a>
       <a class="button subtle" href="https://github.com/microsoft/PowerToys">PowerToys on GitHub</a>
@@ -31,7 +31,7 @@
   <main id="main">
     <section class="hero container" aria-labelledby="title">
       <p class="eyebrow">Part of the PowerToys suite of tools for Windows</p>
-      <h1 id="title">PowerToys Text Expander</h1>
+      <h1 id="title">Text Expander</h1>
       <p class="lead">Type a short trigger and get the full text, in any app.</p>
       <div class="actions">
         <a class="button accent" href="https://github.com/microsoft/PowerToys/releases">Download PowerToys</a>
@@ -110,24 +110,89 @@ Your Name
       <p class="note">Start triggers with a symbol such as <code>!</code> so they don’t fire in the middle of a word. In a one-line snippet, <code>\n</code> starts a new line and <code>\t</code> adds a tab.</p>
 
       <h3 class="subhead">Variables</h3>
-      <p>Add these anywhere in a snippet. In Settings, <b>Insert variable</b> adds them for you, and the preview shows what the snippet will type.</p>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th scope="col">Variable</th><th scope="col">What it adds</th><th scope="col">Example</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><code>{{date}}</code></td><td>Today’s date</td><td data-sample="date">10/18/26</td></tr>
-            <tr><td><code>{{time}}</code></td><td>The time</td><td data-sample="time">09:41 AM</td></tr>
-            <tr><td><code>{{datetime}}</code></td><td>The date and time</td><td data-sample="datetime">10/18/26 09:41 AM</td></tr>
-            <tr><td><code>{{isodate}}</code></td><td>The date as year, month and day</td><td data-sample="isodate">2026-10-18</td></tr>
-            <tr><td><code>{{date:dddd}}</code></td><td>The date in a format you choose. <code>dddd</code> is the day of the week, and <code>MMMM d, yyyy</code> is the full date.</td><td data-sample="weekday">Sunday</td></tr>
-            <tr><td><code>{{clipboard}}</code></td><td>What’s on your clipboard</td><td>Whatever you copied last</td></tr>
-            <tr><td><code>{{prompt:Name}}</code></td><td>Something you type each time the snippet runs. Text Expander asks for it using your label, here “Name”.</td><td>A small window asks for “Name”</td></tr>
-            <tr><td><code>$|$</code></td><td>Where the cursor goes once the snippet expands</td><td>The cursor waits there</td></tr>
-          </tbody>
-        </table>
+      <div class="vars-intro">
+        <p>Add these anywhere in a snippet. In Settings, <b>Insert variable</b> adds them for you, and the preview shows what the snippet will type. Each one below shows a snippet in action.</p>
+        <button type="button" class="button small demo-toggle" data-playing="false" hidden>
+          <svg class="icon-pause" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M4 2.5h2.6v11H4zm5.4 0H12v11H9.4z"/></svg>
+          <svg class="icon-play" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M4.5 2.4v11.2L13.4 8z"/></svg>
+          <span class="demo-toggle-label">Play animations</span>
+        </button>
       </div>
+      <ul class="vars">
+        <li class="var">
+          <h4><code>{{date}}</code></h4>
+          <p>Today’s date</p>
+          <div class="demo" data-demo="date">
+            <code class="demo-snippet">!ddate={{date}}</code>
+            <div class="demo-field" role="img" aria-label="Typing !ddate after “Due” gives “Due 10/18/26”"><span class="demo-live">Due 10/18/26</span></div>
+          </div>
+        </li>
+        <li class="var">
+          <h4><code>{{time}}</code></h4>
+          <p>The time</p>
+          <div class="demo" data-demo="time">
+            <code class="demo-snippet">!ttime={{time}}</code>
+            <div class="demo-field" role="img" aria-label="Typing !ttime after “Called at” gives “Called at 09:41 AM”"><span class="demo-live">Called at 09:41 AM</span></div>
+          </div>
+        </li>
+        <li class="var">
+          <h4><code>{{datetime}}</code></h4>
+          <p>The date and time</p>
+          <div class="demo" data-demo="datetime">
+            <code class="demo-snippet">!ddt={{datetime}}</code>
+            <div class="demo-field" role="img" aria-label="Typing !ddt after “Updated” gives “Updated 10/18/26 09:41 AM”"><span class="demo-live">Updated 10/18/26 09:41 AM</span></div>
+          </div>
+        </li>
+        <li class="var">
+          <h4><code>{{isodate}}</code></h4>
+          <p>The date as year, month and day</p>
+          <div class="demo" data-demo="isodate">
+            <code class="demo-snippet">!isodate={{isodate}}</code>
+            <div class="demo-field" role="img" aria-label="Typing !isodate after “report-” gives “report-2026-10-18”"><span class="demo-live">report-2026-10-18</span></div>
+          </div>
+        </li>
+        <li class="var">
+          <h4><code>{{date:dddd}}</code></h4>
+          <p>The date in a format you choose. <code>dddd</code> is the day of the week, and <code>MMMM d, yyyy</code> is the full date.</p>
+          <div class="demo" data-demo="longdate">
+            <code class="demo-snippet">!longdate={{date:dddd, MMMM d, yyyy}}</code>
+            <div class="demo-field" role="img" aria-label="Typing !longdate gives “Sunday, October 18, 2026”"><span class="demo-live">Sunday, October 18, 2026</span></div>
+          </div>
+        </li>
+        <li class="var">
+          <h4><code>{{clipboard}}</code></h4>
+          <p>What’s on your clipboard</p>
+          <div class="demo" data-demo="clipboard">
+            <code class="demo-snippet">!link=Here’s the link: {{clipboard}}</code>
+            <div class="demo-clip" aria-hidden="true">
+              <span class="demo-url"><span class="demo-url-text">contoso.com/q4-plan</span></span>
+              <span class="demo-keys"><kbd>Ctrl</kbd>+<kbd>C</kbd></span>
+            </div>
+            <div class="demo-field" role="img" aria-label="With contoso.com/q4-plan copied, typing !link gives “Here’s the link: contoso.com/q4-plan”"><span class="demo-live">Here’s the link: contoso.com/q4-plan</span></div>
+          </div>
+        </li>
+        <li class="var">
+          <h4><code>{{prompt:Name}}</code></h4>
+          <p>Something you type each time the snippet runs. Text Expander asks for it using your label, here “Name”.</p>
+          <div class="demo" data-demo="prompt">
+            <code class="demo-snippet">!hello=Hi {{prompt:Name}}, thanks for reaching out!</code>
+            <div class="demo-field" role="img" aria-label="Typing !hello opens a small window that asks for Name. Entering Elaine gives “Hi Elaine, thanks for reaching out!”"><span class="demo-live">Hi Elaine, thanks for reaching out!</span></div>
+            <div class="demo-ask" aria-hidden="true">
+              <span class="demo-ask-title">Text Expander<svg viewBox="0 0 10 10" width="8" height="8"><path d="M1 1l8 8M9 1 1 9" stroke="currentColor" stroke-width="1.2"/></svg></span>
+              <span class="demo-ask-label">Name</span>
+              <span class="demo-ask-row"><span class="demo-ask-box"><span class="demo-answer"></span><span class="caret"></span></span><span class="demo-ask-ok">OK</span></span>
+            </div>
+          </div>
+        </li>
+        <li class="var">
+          <h4><code>$|$</code></h4>
+          <p>Where the cursor goes once the snippet expands</p>
+          <div class="demo" data-demo="cursor">
+            <code class="demo-snippet">!todo=// TODO: $|$ ({{isodate}})</code>
+            <div class="demo-field" role="img" aria-label="Typing !todo gives “// TODO:  (2026-10-18)”, with the cursor after “// TODO:” so you can keep typing"><span class="demo-live">// TODO: <span class="caret"></span> (2026-10-18)</span></div>
+          </div>
+        </li>
+      </ul>
     </section>
 
     <section class="section container" id="faq" aria-labelledby="faq-title">
@@ -180,26 +245,6 @@ Your Name
     </div>
   </footer>
 
-  <script>
-    // Show the variable examples for the moment the page is read, in the formats Text Expander uses.
-    (() => {
-      const now = new Date();
-      const pad = n => String(n).padStart(2, "0");
-      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-      const date = `${pad(now.getMonth() + 1)}/${pad(now.getDate())}/${String(now.getFullYear()).slice(-2)}`;
-      const time = `${pad(now.getHours() % 12 || 12)}:${pad(now.getMinutes())} ${now.getHours() < 12 ? "AM" : "PM"}`;
-      const samples = {
-        date,
-        time,
-        datetime: `${date} ${time}`,
-        isodate: `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`,
-        weekday: days[now.getDay()],
-      };
-      document.querySelectorAll("[data-sample]").forEach(cell => {
-        const value = samples[cell.dataset.sample];
-        if (value) cell.textContent = value;
-      });
-    })();
-  </script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>
