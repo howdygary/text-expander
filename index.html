@@ -34,7 +34,7 @@
       <h1 id="title">Text Expander</h1>
       <p class="lead">The text you type every day, a few keystrokes away.</p>
       <div class="actions">
-        <a class="button accent" href="https://github.com/microsoft/PowerToys/pull/50879">View the draft PowerToys PR</a>
+        <a class="button accent" href="https://github.com/microsoft/PowerToys/pull/51475">View the PowerToys PR</a>
         <a class="button" href="#variables">See what snippets can do</a>
       </div>
       <figure class="shot">
@@ -71,11 +71,11 @@
         </li>
         <li>
           <h3>Add a snippet</h3>
-          <p>Select <b>New snippet</b>, then give it a trigger, such as <code>!mysig</code>, and the text it should turn into. You can also start from an example.</p>
-          <div class="step-demo" role="img" aria-label="The Snippet window in PowerToys Settings, with the trigger !mysig and the replacement “Kind regards, Gary”.">
-            <p class="lbl">PowerToys Settings</p>
+          <p>Select <b>Manage snippets</b> to open the snippet editor, then select <b>New snippet</b>. Give it a trigger, such as <code>!mysig</code>, and the text it should turn into. You can also start from an example.</p>
+          <div class="step-demo" role="img" aria-label="The New snippet window in the snippet editor, with the trigger !mysig and the replacement “Kind regards, Gary”.">
+            <p class="lbl">PowerToys Text Expander - Manage snippets</p>
             <div class="mini-dialog">
-              <p class="mini-title">Snippet</p>
+              <p class="mini-title">New snippet</p>
               <span class="mini-label">Trigger</span>
               <div class="mini-box mini-trigger"><span class="how-trigger">!mysig</span><span class="caret"></span></div>
               <span class="mini-label">Replacement</span>
@@ -123,7 +123,7 @@
         </article>
         <article class="card">
           <h3>Plain text, full control</h3>
-          <p>Your snippets stay readable and portable in one plain-text file. Edit them in Settings or any text editor—no special editor required.</p>
+          <p>Your snippets stay readable and portable in one JSON file, the snippets database. Edit them in the snippet editor or any text editor. The snippet editor’s <b>Saved on this PC</b> menu has <b>Open in text editor</b>.</p>
         </article>
       </div>
     </section>
@@ -132,7 +132,7 @@
       <div class="vars-head">
         <div>
           <h2 id="variables-title">Variables</h2>
-          <p>A snippet is a trigger, such as <code>!ddate</code>, and the text it turns into, called its replacement. Add a variable to the replacement, and Text Expander fills it in each time the snippet runs. In Settings, <b>Insert variable</b> adds them for you.</p>
+          <p>A snippet is a trigger, such as <code>!ddate</code>, and the text it turns into, called its replacement. Add a variable to the replacement, and Text Expander fills it in each time the snippet runs. In the snippet editor, <b>Insert variable</b> adds them for you.</p>
         </div>
         <button type="button" class="button small demo-toggle vars-toggle" data-playing="false" hidden>
           <svg class="icon-pause" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M4 2.5h2.6v11H4zm5.4 0H12v11H9.4z"/></svg>
@@ -264,7 +264,7 @@
         </li>
         <li class="var">
           <div class="var-text">
-            <h3 class="var-name">Ask me when it runs <code class="var-token">{{prompt:<i>question</i>}}</code></h3>
+            <h3 class="var-name">Ask a question <code class="var-token">{{prompt:<i>question</i>}}</code></h3>
             <p>A small window asks you to type something, with your words as the question.</p>
           </div>
           <div class="var-demo" data-demo data-answer="Elaine">
@@ -279,7 +279,7 @@
             <div class="var-panel">
               <p class="lbl">Type <code class="trig">!hello</code> in most apps</p>
               <div class="demo-field" role="img" aria-label="Typing !hello opens a small window that asks for “First name”. Answering Elaine gives “Hi Elaine, thanks for reaching out!”."><span class="demo-live">Hi Elaine, thanks for reaching out!</span></div>
-              <div class="demo-ask" aria-hidden="true"><span class="demo-ask-title">Text Expander<svg viewBox="0 0 10 10" width="8" height="8"><path d="M1 1l8 8M9 1 1 9" stroke="currentColor" stroke-width="1.2"/></svg></span><span class="demo-ask-label">First name</span><span class="demo-ask-row"><span class="demo-ask-box"><span class="demo-answer"></span><span class="caret"></span></span><span class="demo-ask-ok">OK</span></span></div>
+              <div class="demo-ask" aria-hidden="true"><span class="demo-ask-title">PowerToys Text Expander<svg viewBox="0 0 10 10" width="8" height="8"><path d="M1 1l8 8M9 1 1 9" stroke="currentColor" stroke-width="1.2"/></svg></span><span class="demo-ask-label">First name</span><span class="demo-ask-row"><span class="demo-ask-box"><span class="demo-answer"></span><span class="caret"></span></span><span class="demo-ask-ok">OK</span></span></div>
             </div>
           </div>
         </li>
@@ -311,15 +311,23 @@
       <div class="faq">
         <article>
           <h3>Where are my snippets saved?</h3>
-          <p>In a plain text file called <code>PowerToysTextExpanderSnippets.txt</code>. Unless you sync it, it’s in <code>%LOCALAPPDATA%\<wbr>Microsoft\<wbr>PowerToys\<wbr>TextExpander</code>. Text Expander reloads it whenever you save, so there’s nothing to restart.</p>
+          <p>In your snippets database, a JSON file called <code>PowerToysTextExpanderSnippets.json</code>. Unless you sync it, it’s in <code>%LOCALAPPDATA%\<wbr>Microsoft\<wbr>PowerToys\<wbr>TextExpander</code>. Text Expander reloads it whenever you save, even in a text editor, so there’s nothing to restart.</p>
         </article>
         <article>
           <h3>Can I use the same snippets on all my PCs?</h3>
-          <p>Yes. In Text Expander settings, turn on <b>Sync across PCs</b> to keep your snippets in OneDrive. Using another sync app? Choose its folder instead.</p>
+          <p>Yes. In the snippet editor, open <b>Saved on this PC</b>, select <b>Move snippets database…</b> and save it in OneDrive or another synced folder. Then on each of your other PCs, select <b>Sync from another PC…</b> and pick that database.</p>
+        </article>
+        <article>
+          <h3>Is my snippets database private?</h3>
+          <p>It’s saved as plain text and isn’t encrypted, so don’t save passwords, Social Security numbers, credit card numbers or other sensitive info in snippets.</p>
         </article>
         <article>
           <h3>Does it work in every app?</h3>
           <p>In most apps. Snippets don’t expand in apps running as administrator or in standard Windows password boxes. They can still expand in password fields on websites and in some apps.</p>
+        </article>
+        <article>
+          <h3>Does it work when I type in Japanese, Chinese or Korean?</h3>
+          <p>Yes, if you switch your input method editor (IME) to direct input or English before you type a trigger.</p>
         </article>
         <article>
           <h3>What if an app doesn’t accept the text?</h3>
@@ -327,7 +335,7 @@
         </article>
         <article>
           <h3>Why does my trigger fire in the middle of a word?</h3>
-          <p>Start your triggers with a symbol such as <code>!</code>, or turn on <b>Wait for the whole word</b> under <b>Advanced</b>. Text Expander then waits for a space or punctuation before it expands, and leaves the space or punctuation in place.</p>
+          <p>Start your triggers with a symbol such as <code>!</code>, or turn on <b>Wait for space or punctuation</b> under <b>Advanced</b>. Text Expander then waits for a space or punctuation before it expands, and leaves the space or punctuation in place.</p>
         </article>
         <article>
           <h3>Can I undo an expansion?</h3>
@@ -352,7 +360,7 @@
   <footer class="site-footer">
     <div class="container">
       <p>Text Expander and this page were built by <a href="https://github.com/howdyimgary">Gary Hsu</a>.</p>
-      <p>Page last updated October 19, 2026.</p>
+      <p>Page last updated October 31, 2026.</p>
     </div>
   </footer>
 
