@@ -11,8 +11,8 @@
   const pad = n => String(n).padStart(2, "0");
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  const date = `${pad(now.getMonth() + 1)}/${pad(now.getDate())}/${String(now.getFullYear()).slice(-2)}`;
-  const time = `${pad(now.getHours() % 12 || 12)}:${pad(now.getMinutes())} ${now.getHours() < 12 ? "AM" : "PM"}`;
+  const date = `${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()}`;
+  const time = `${now.getHours() % 12 || 12}:${pad(now.getMinutes())} ${now.getHours() < 12 ? "AM" : "PM"}`;
   const values = {
     "{{date}}": date,
     "{{time}}": time,
